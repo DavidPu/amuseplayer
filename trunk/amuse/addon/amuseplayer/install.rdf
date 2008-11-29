@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="urn:mozilla:install-manifest"
+                   em:id="{1c25e602-e331-4b39-a8ef-f06fdc52fc61}"
+                   em:name="Amuse Player"
+                   em:version="2.0"
+                   em:creator="pulq.ustc@gmail.com"
+                   em:description="Mp3 player for Baidu.com mp3, Yahoo.com music and google music"
+                   em:homepageURL="http://www.amuseplayer.com/"
+                   em:iconURL="chrome://amuseplayer/skin/icons/amuse32.png">
+    <em:targetApplication RDF:resource="rdf:#$KN2551"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="rdf:#$KN2551"
+                   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                   em:minVersion="1.5"
+                   em:maxVersion="3.0.*" />
+</RDF:RDF>

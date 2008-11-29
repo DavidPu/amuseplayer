@@ -1,0 +1,21 @@
+html, body,span {
+        font-size:12px;
+        margin:0;
+        padding:0;
+        border:0 none;
+        overflow:auto;
+        height:100%;
+    }
+p {margin:5px;}
+.amuseplayer-icon {background-image:url(./amuseplayer16.png) !important;}	
+.baidu-icon {background-image:url(./baidu.png) !important;}
+.google-icon {background-image:url(./google.png) !important;}
+.play-icon {background-image:url(./play.png) !important;}	
+.pause-icon {background-image:url(./pause.png) !important;}	
+.stop-icon {background-image:url(./stop.png) !important;}	
+.next-icon {background-image:url(./next.png) !important;}	
+.prev-icon {background-image:url(./prev.png) !important;}	
+.volume-icon {background-image:url(./volume.png) !important;}	
+
+.x-grid3-check-amuse-col{cursor: pointer; width:100%;height:16px;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-image:url(amuse16.png);}
+.x-grid3-check-amuse-col-on{cursor: pointer; width:100%;height:16px;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-image:url(amuse16.png);}	
