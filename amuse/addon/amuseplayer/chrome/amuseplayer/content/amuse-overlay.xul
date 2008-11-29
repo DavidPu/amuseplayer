@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://amuseplayer/skin/overlay.css" type="text/css"?>
+
+<overlay id    = "AmusePlayerOverlay"
+         xmlns = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<script type="application/x-javascript" src="chrome://amuseplayer/content/io.js"/>
+<script type="application/x-javascript" src="chrome://amuseplayer/content/json2.js"/>
+<script type="application/x-javascript" src="chrome://amuseplayer/content/md5.js"/>
+
+<script type="application/x-javascript" src="chrome://amuseplayer/content/amuse-util.js"/>
+<script type="application/x-javascript" src="chrome://amuseplayer/content/amuse-baidu.js"/>
+<script type="application/x-javascript" src="chrome://amuseplayer/content/amuse-google.js"/>
+<script type="application/x-javascript" src="chrome://amuseplayer/content/amuse-yahoo.js"/>
+<script type="application/x-javascript" src="chrome://amuseplayer/content/amuse-gougou.js"/>
+
+<script type="application/x-javascript" src="chrome://amuseplayer/content/amuse-server.js"/>
+
+<script type="application/x-javascript" src="chrome://amuseplayer/content/amuse-overlay.js"/>
+
+  <menupopup       id="menu_ToolsPopup">
+    <menuitem      id="amuseplayertoolsmenu"   label="AmusePlayer"       oncommand="loadAmusePlayer()"
+                   accesskey="P"           position="8"          class="menuitem-iconic"/>
+  </menupopup>
+                   
+  <toolbarpalette  id="BrowserToolbarPalette">
+    <toolbarbutton id="amuseplayer-button"     label="AmusePlayer"       oncommand="loadAmusePlayer()" onclick="if (event.button == 1) loadAmusePlayer()"
+                   class="toolbarbutton-1 chromeclass-toolbar-additional amuseplayer-button" tooltiptext="AmusePlayer"/>
+  </toolbarpalette>
+
+</overlay>

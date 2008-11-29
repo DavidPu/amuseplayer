@@ -1,0 +1,5 @@
+content amuseplayer chrome/amuseplayer/content/ xpcnativewrappers=yes
+locale amuseplayer en-US chrome/amuseplayer/locale/en-US/
+skin amuseplayer classic/1.0 chrome/amuseplayer/skin/
+overlay chrome://browser/content/browser.xul         chrome://amuseplayer/content/amuse-overlay.xul
+style   chrome://global/content/customizeToolbar.xul chrome://amuseplayer/skin/overlay.css

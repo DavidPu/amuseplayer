@@ -1,0 +1,11 @@
+#amuseplayer-button {
+  list-style-image    : url("chrome://amuseplayer/skin/icons/amuse24.png");
+}
+
+toolbar[iconsize="small"] #amuseplayer-button {
+  list-style-image    : url("chrome://amuseplayer/skin/icons/amuse16.png");
+}
+
+#amuseplayertoolsmenu, #amuseplayercontentarea, #amuseplayercontextmenu {
+  list-style-image    : url("chrome://amuseplayer/skin/icons/amuse16.png");
+}

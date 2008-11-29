@@ -1,0 +1,562 @@
+﻿[{
+        text:'当前播放列表',
+        id:'cur_playlist',
+        leaf:true
+  }
+  ,{
+	    text:'谷歌 Music',
+	    expanded: true,
+	    children:[{text:'Xuwei',url:'http://www.google.cn/music/search?q=%E9%A3%9E%E9%B8%9F',leaf:true},{
+	        text:'歌曲200强',
+	        url:'http://www.google.cn/music/chartlisting?q=all_songs_cn&cat=song',
+	        leaf:true
+	    },{
+	        text:'新歌100强',
+	        url:'http://www.google.cn/music/chartlisting?q=all_songs_cn&cat=song',
+	        leaf:true
+	    },{
+	        text:'摇滚歌曲',
+	        url:'http://www.google.cn/music/chartlisting?q=rock_songs_cn&cat=song',
+	        leaf:true
+	    },{
+	        text:'影视歌曲',
+	        url:'http://www.google.cn/music/chartlisting?q=soundtrack_songs_cn&cat=song',
+	        leaf:true
+	    },{
+	        text:'民族歌曲',
+	        url:'http://www.google.cn/music/chartlisting?q=ethnic_songs_cn&cat=song',
+	        leaf:true
+	    },{
+	        text:'美丽主妇家务歌',
+	        url:'http://www.google.cn/music/chartlisting?q=top100_charm_housewives_songs&cat=song',
+	        leaf:true
+	    },{
+	        text:'二人世界居家曲',
+	        url:'http://www.google.cn/music/chartlisting?q=top100_duet_songs&cat=song',
+	        leaf:true
+	    },{
+	        text:'北京城市标志歌',
+	        url:'http://www.google.cn/music/chartlisting?q=top100_beijing_city_landmark_songs&cat=song',
+	        leaf:true
+	    },{
+	        text:'放松心情专用歌',
+	        url:'http://www.google.cn/music/chartlisting?q=top100_comfortable_holiday_songs&cat=song',
+	        leaf:true
+	    },{
+	        text:'快乐生活休闲歌',
+	        url:'http://www.google.cn/music/chartlisting?q=top100_joyous_music_life_songs&cat=song',
+	        leaf:true
+	    },{
+	        text:'唱作男生最流行',
+	        url:'http://www.google.cn/music/chartlisting?q=top100_best_men_singer-songwriter_songs&cat=song',
+	        leaf:true
+	    },{
+	        text:'抗震救灾壮志曲',
+	        url:'http://www.google.cn/music/chartlisting?q=top100_earthquake_relief_songs&cat=song',
+	        leaf:true
+	    },{
+	        text:'婚礼必选祝福歌',
+	        url:'http://www.google.cn/music/chartlisting?q=top100_wedding_songs&cat=song',
+	        leaf:true
+	    },
+	    {
+			text:'悠悠四季风之歌',
+			url:'http://www.google.cn/music/chartlisting?q=top100_the-wind-songs&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'国荣经典曲回顾',
+			url:'http://www.google.cn/music/chartlisting?q=top100_leslies_songs&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'绿色环保公益歌',
+			url:'http://www.google.cn/music/chartlisting?q=top100_environmental-protection-songs&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'享受慵懒休闲歌',
+			url:'http://www.google.cn/music/chartlisting?q=top100_lazy-songs&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'旧日思绪怀旧曲',
+			url:'http://www.google.cn/music/chartlisting?q=top100_nostalgia-songs&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'清新吉他伴民谣',
+			url:'http://www.google.cn/music/chartlisting?q=top100_folk_songs_with_original_guitar&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'重温90华语歌坛',
+			url:'http://www.google.cn/music/chartlisting?q=top100_90s-chinese-songs&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'金牌粤语天王篇',
+			url:'http://www.google.cn/music/chartlisting?q=top100_king-of-cantonese-singer&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'金牌粤语天后篇',
+			url:'http://www.google.cn/music/chartlisting?q=top100_queen-of-cantonese-singer&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'歌从马来西亚来',
+			url:'http://www.google.cn/music/chartlisting?q=top100_the_songs-of-malaysia-singers&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'平民巨星热曲汇',
+			url:'http://www.google.cn/music/chartlisting?q=top100_the-songs-of-ordinary-people&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'婚礼必选祝福歌',
+			url:'http://www.google.cn/music/chartlisting?q=top100_wedding_songs&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'粤语怀旧白金曲',
+			url:'http://www.google.cn/music/chartlisting?q=top100_cantonese_reminiscence_songs&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'历届迷笛精品汇',
+			url:'http://www.google.cn/music/chartlisting?q=top100_midi_festival_songs&cat=song',
+			leaf:true
+			},
+			
+			{
+			text:'华人组合热歌榜',
+			url:'http://www.google.cn/music/chartlisting?q=top100_chinese_band_songs&cat=song',
+			leaf:true
+			},
+	    ]
+	}	
+	
+  ,{
+    text:'百度MP3',
+    expanded: true,
+    children:[{text:'XUwei',url:'http://mp3.baidu.com/singerlist/%D0%ED%CE%A1.html',leaf:true},{
+        text:'MP3排行榜',
+        url:'http://list.mp3.baidu.com/list/topmp3.html?id=1',
+        leaf:true
+    },{
+        text:'新歌TOP100',
+        url:'http://list.mp3.baidu.com/list/newhits.html?top1',
+        leaf:true
+    },{
+        text:'歌曲TOP500',
+        url:'http://list.mp3.baidu.com/topso/mp3topsong.html?id=1?top2',
+        leaf:true
+    },{
+        text:'轻音乐',
+        url:'http://list.mp3.baidu.com/list/qingyinyue.html?top19',
+        leaf:true
+    },{
+        text:'热门对唱',
+        url:'http://list.mp3.baidu.com/list/duichang.html?top20',
+        leaf:true
+    },{
+        text:'电视金曲',
+        url:'http://list.mp3.baidu.com/list/tvs.html?id=1?top5',
+        leaf:true
+    },{
+        text:'电影金曲',
+        url:'http://list.mp3.baidu.com/list/movies.html',
+        leaf:true
+    },{
+        text:'校园歌曲',
+        url:'http://list.mp3.baidu.com/xiaoyuan/mp3topsong.html?top13',
+        leaf:true
+    },{
+        text:'摇滚歌曲榜',
+        url:'http://list.mp3.baidu.com/list/yaogun.html?top21',
+        leaf:true
+    },{
+        text:'民歌精选',
+        url:'http://list.mp3.baidu.com/minge/mp3topsong.html?top12',
+        leaf:true
+    },{
+        text:'热门FLASH',
+        url:'http://list.mp3.baidu.com/list/flash.html?top11',
+        leaf:true
+    },{
+        text:'热舞DJ',
+        url:'http://list.mp3.baidu.com/list/dj.html?top10',
+        leaf:true
+    },{
+        text:'少儿歌曲',
+        url:'http://list.mp3.baidu.com/list/shaoergequ.html',
+        leaf:true
+    },{
+        text:'流金岁月',
+        url:'http://list.mp3.baidu.com/list/liujinsuiyue.html?top24',
+        leaf:true
+    },{
+        text:'欧美金曲',
+        url:'http://list.mp3.baidu.com/list/oumei.html',
+        leaf:true
+    },{
+        text:'日韩专题',
+        url:'http://list.mp3.baidu.com/list/rihan.html',
+        leaf:true
+    },{
+        text:'经典老歌',
+        url:'http://list.mp3.baidu.com/list/oldsong.html?top6',
+        leaf:true
+    },{
+        text:'相声小品荟萃',
+        url:'http://list.mp3.baidu.com/list/xiangsheng.html?top17',
+        leaf:true
+    },{
+        text:'军旅歌曲',
+        url:'http://list.mp3.baidu.com/list/junge.html?top16',
+        leaf:true
+    },{
+        text:'乐队组合榜',
+        url:'http://list.mp3.baidu.com/list/yuedui.html?top25',
+        leaf:true
+    },{
+        text:'中国民乐',
+        url:'http://list.mp3.baidu.com/list/minyue.html?top20',
+        leaf:true
+    },{
+        text:'曲艺集锦',
+        url:'http://list.mp3.baidu.com/list/quyi.html?top18',
+        leaf:true
+    }]
+} ,{
+    text:'雅虎 music',
+    expanded: true,
+    children:[
+			{
+					text:'新歌Top500',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%D0%C2%B8%E8%EC%AD%C9%FD%B0%F1&source=ysmm_lmeu_lnew&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'热搜Top600',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%C8%C8%CB%D1%B8%E8%C7%FA&source=ysmm_lmeu_lhot&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'流行Top600',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%C1%F7%D0%D0%BD%F0%C7%FA&source=ysmm_lmeu_lpop&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'老歌Top500',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%C4%D1%CD%FC%C0%CF%B8%E8&source=ysmm_lmeu_lold&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'舞曲Top100',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%BE%A2%B1%AC%CE%E8%C7%FA&source=ysmm_lmeu_ldan&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'影视Top600',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%D3%B0%CA%D3%D4%AD%C9%F9&source=ysmm_lmeu_lmov&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'赈灾歌曲',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%EA%E2%D4%D6%B8%E8%C7%FA&sub3=%B8%E8%CA%D6&source=ysmm_lmeu_lzhz&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'奥运歌曲',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%B0%C2%D4%CB%B8%E8%C7%FA&sub3=%B7%D6%C0%E0&source=ysmm_lmeu_laoy&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'心情歌曲',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%D0%C4%C7%E9%B8%E8%C7%FA&sub3=%B7%D6%C0%E0&source=ysmm_lmeu_lxq&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'搞笑歌曲',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%B8%E3%D0%A6%B8%E8%C7%FA&source=ysmm_lmeu_lgao&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'快乐男声',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%BF%EC%C0%D6%C4%D0%C9%F9&sub3=%B8%E8%CA%D6&source=ysmm_lmeu_lkn&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'说唱嘻哈',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%CB%B5%B3%AA%CE%FB%B9%FE&sub3=%B8%E8%CA%D6&source=ysmm_lmeu_lsc&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'歌手成名曲',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%B8%E8%CA%D6%B3%C9%C3%FB%C7%FA&source=ysmm_lmeu_lcmq&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'香港回归',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%CF%E3%B8%DB%BB%D8%B9%E9%CA%AE%D6%DC%C4%EA&sub3=%B7%D6%C0%E0&source=ysmm_lmeu_lhg&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'欧美歌曲',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%C5%B7%C3%C0%B8%E8%C7%FA&source=ysmm_lmeu_lom&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'场景音乐',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%B3%A1%BE%B0%D2%F4%C0%D6&sub3=%B7%D6%C0%E0&source=ysmm_lmeu_lchj&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'轻 音 乐',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%C7%E1%D2%F4%C0%D6&source=ysmm_lmeu_lqyy&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'经典对唱',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%BE%AD%B5%E4%B6%D4%B3%AA&source=ysmm_lmeu_ldui&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'同一首歌',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%CD%AC%D2%BB%CA%D7%B8%E8&sub3=%D7%D6%C4%B8&source=ysmm_lmeu_lsam&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'儿童歌曲',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%B6%F9%CD%AF%B8%E8%C7%FA&source=ysmm_lmeu_lerg&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'日韩歌曲',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%C8%D5%BA%AB%B8%E8%C7%FA&source=ysmm_lmeu_lrih&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'戏曲梨园',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%CF%B7%C7%FA%C0%E6%D4%B0&source=ysmm_lmeu_lly&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'获奖歌曲',
+					url:'http://music.cn.yahoo.com/mp3list.php?sub1=%B8%E8%C7%FA&sub2=%BB%F1%BD%B1%B8%E8%C7%FA&sub3=%B7%D6%C0%E0&source=ysmm_lmeu_lhj&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'妈妈的歌',
+					url:'http://music.cn.yahoo.com/mp3list.php?sub1=%B8%E8%C7%FA&sub2=%CF%D7%B8%F8%C2%E8%C2%E8%B5%C4%B8%E8&sub3=%B7%D6%C0%E0&source=ysmm_lmeu_lmm&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'翻唱歌曲',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%B7%AD%B3%AA%B8%E8%C7%FA&source=ysmm_lmeu_lfch&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'超女歌曲',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%B3%AC%C5%AE%B8%E8%C7%FA&source=ysmm_lmeu_lchn&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'中 国 风',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%D6%D0%B9%FA%B7%E7&sub3=%B8%E8%CA%D6&source=ysmm_lmeu_lzgf&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'民族乐器',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%C3%F1%D7%E5%C0%D6%C6%F7&sub3=%B7%D6%C0%E0&source=ysmm_lmeu_lmy&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'春晚歌曲',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%B4%BA%CD%ED%B8%E8%C7%FA&source=ysmm_lmeu_lchw&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'广告歌曲',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%B9%E3%B8%E6%B8%E8%C7%FA&sub3=%B7%D6%C0%E0&source=ysmm_lmeu_lads&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'粤语歌曲',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%D4%C1%D3%EF%B8%E8%C7%FA&source=ysmm_lmeu_lyue&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'热门Flash',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%C8%C8%C3%C5Flash&source=ysmm_lmeu_lfla&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'摇滚另类',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%D2%A1%B9%F6%C1%ED%C0%E0&source=ysmm_lmeu_lroc&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'校园民谣',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%D0%A3%D4%B0%C3%F1%D2%A5&source=ysmm_lmeu_lshc&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'相声小品',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%CF%E0%C9%F9%D0%A1%C6%B7&source=ysmm_lmeu_lhum&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'游戏动漫',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%D3%CE%CF%B7%B6%AF%C2%FE&source=ysmm_lmeu_lgam&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'军旅民歌',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%BE%FC%C2%C3%C3%F1%B8%E8&source=ysmm_lmeu_larm&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'原创地带',
+					url:'http://music.cn.yahoo.com/origzone_special.html?source=ysmm_lmeu_lwlx&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:' 歌手大全',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%CA%D6&sub2=%BB%AA%D3%EF%C4%D0%B8%E8%CA%D6&source=ysmm_lmeu_lhym&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'华语女歌手',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%CA%D6&sub2=%BB%AA%D3%EF%C5%AE%B8%E8%CA%D6&source=ysmm_lmeu_lhyf&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'华语组合',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%CA%D6&sub2=%BB%AA%D3%EF%D7%E9%BA%CF&source=ysmm_lmeu_lhyz&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'华语男歌手',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%CA%D6&sub2=%BB%AA%D3%EF%C4%D0%B8%E8%CA%D6&source=ysmm_lmeu_lhym&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'欧美女歌手',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%CA%D6&sub2=%C5%B7%C3%C0%C5%AE%B8%E8%CA%D6&source=ysmm_lmeu_lomf&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'欧美组合',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%CA%D6&sub2=%C5%B7%C3%C0%D7%E9%BA%CF&source=ysmm_lmeu_lomz&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'欧美女歌手',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%CA%D6&sub2=%C8%D5%BA%AB%C4%D0%B8%E8%CA%D6&source=ysmm_lmeu_lrhm&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'日韩男歌手',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%CA%D6&sub2=%C8%D5%BA%AB%C4%D0%B8%E8%CA%D6&source=ysmm_lmeu_lrhm&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'日韩女歌手',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%CA%D6&sub2=%C8%D5%BA%AB%C5%AE%B8%E8%CA%D6&source=ysmm_lmeu_lrhf&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'日韩组合',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%CA%D6&sub2=%C8%D5%BA%AB%D7%E9%BA%CF&source=ysmm_lmeu_lrhz&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'按地区分',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%CA%D6&sub2=%B0%B4%B7%E7%B8%F1%B7%D6&source=ysmm_lmeu_lfg&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'按风格分',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%CA%D6&sub2=%D0%C7%D7%F9%B8%E8%CA%D6&source=ysmm_lmeu_lhxz&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'按星座分',
+					url:'http://music.cn.yahoo.com/mp3list.php?pid=ysearch&sub1=%B8%E8%C7%FA&sub2=%B0%B4%C9%FA%C8%D5%B7%D6&sub3=%B2%C2%D2%BB%B2%C2&source=ysmm_lmeu_lshr&origin=onesearch',
+					leaf:true
+			}
+			
+			,{
+					text:'按生日分',
+					url:'http://music.cn.yahoo.com/mp3list_top.php?pid=ysearch&sub1=%B8%E8%C7%FA&ring=wireless&source=ysmm_lmeu_lsjls&origin=onesearch',
+					leaf:true
+			}
+  	]
+}]
