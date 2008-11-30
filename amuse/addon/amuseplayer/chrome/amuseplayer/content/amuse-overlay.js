@@ -11,12 +11,14 @@ function loadAmusePlayer() {
 
   if (loadInTab) {
     //var theTab          = gBrowser.addTab('http://localhost/amuse/src/amuseplayer1-18.html'/*'chrome://amuseplayer/content/extamuse.xul'*/);
-    var theTab          = gBrowser.addTab('chrome://amuseplayer/content/extamuse.xul');
+    //var theTab          = gBrowser.addTab('chrome://amuseplayer/content/extamuse.xul');
+    var theTab          = gBrowser.addTab('http://localhost/amuse-googlecode/amuse/webpage/amuseplayer.html');
     theTab.label        = "AmusePlayer";
     gBrowser.selectedTab = theTab;
     var func = function () { gBrowser.setIcon(theTab, "chrome://amuseplayer/skin/icons/logo.png"); };
     setTimeout(func, 500);
   } else {
+  	alert('aa');
   	toOpenWindowByType('mozilla:AmusePlayer', 'chrome://amuseplayer/content/extamuse.xul');
   }
 }

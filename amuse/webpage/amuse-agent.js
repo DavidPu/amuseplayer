@@ -376,7 +376,7 @@ var AmuseAgent = {
 			//AmuseDebugOut("[onLoadMp3] mp3url.length " + mp3url.length);
 			if(mp3url.length >= 60)
 			{
-				el.innerHTML = '<a href="' + mp3url + '>MP3\u6765\u6e90:' + mp3url.substring(0,60) +
+				el.innerHTML = '<a onclick="showDownloadTips(); return false;" href="' + mp3url + '>MP3\u6765\u6e90:' + mp3url.substring(0,60) +
 											' ..... '+ '.mp3</a>';
 			}
 			else if(mp3url.length > 1 )
