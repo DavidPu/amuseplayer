@@ -381,7 +381,7 @@ var AmuseAgent = {
 			}
 			else if(mp3url.length > 1 )
 			{
-					el.innerHTML = '<a href="' + mp3url + '>MP3\u6765\u6e90:' + mp3url + '</a>';
+					el.innerHTML = '<a onclick="showDownloadTips(); return false;"  href="' + mp3url + '>MP3\u6765\u6e90:' + mp3url + '</a>';
 			}
 			AmuseSound.createSound(index, mp3url, true);
 			
