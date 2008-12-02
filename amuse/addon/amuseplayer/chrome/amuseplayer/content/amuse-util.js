@@ -1,5 +1,55 @@
+function AmuseDebugOut(arg){AmuseDebugOut2(arg);}
+function AmuseDebugOut2(arg){}
+function AmuseDebugOutLyrics(arg)
+{
 
+	dump(arg +"\n");
+	if(typeof(console) != 'undefined')
+		{
+			console.log(arg);
+		}
+
+}
+	
+	
 var AmuseUtil = {
+		XHRSync: function(url, encode) {
+			if(url == null) return null;
+
+			try {
+				var httpRequest = new XMLHttpRequest();
+				httpRequest.open("GET", url, false);	
+				if(encode)
+					httpRequest.overrideMimeType(encode);	
+				httpRequest.send(null);
+				if(httpRequest.status == 200) {
+					return httpRequest.responseText;
+				} else {
+					AmuseDebugOut("[AmuseUtil.XHRSync] getData: url:" + url + " httpRequest.status:" + httpRequest.status);
+					return null;
+				}
+			} catch(e){
+				AmuseDebugOut("[AmuseUtil.XHRSync]Execption getData: url:" + url);
+			}
+		},
+		
+		XHRAsync: function(url, encode, callback, userdata) {
+			
+			if(url == null) return false;
+			
+			try {
+				var httpRequest = new XMLHttpRequest();
+				httpRequest.open("GET", url, true);	
+				httpRequest.onload = function() { callback(httpRequest.responseText, userdata);};
+				if(encode)
+					httpRequest.overrideMimeType(encode);
+				httpRequest.send(null);
+			} catch(e){
+				AmuseDebugOut("[AmuseUtil.XHRAsync]Execption getData: url:" + url);
+			}
+			return true;
+		},
+		
 		/* decode 'charset' URL-encoded string to Unicode string. */
 		URL2Unicode: function(charset, data) {
 		var szRet = data.replace(/(%[0-9A-Z][0-9A-Z])/ig, function(e){
@@ -40,19 +90,7 @@ var AmuseUtil = {
 		return ret;
 	},
 };
-
-function AmuseDebugOut(arg){}
-function AmuseDebugOut2(arg)
-{
-/*	
-	dump(arg +"\n");
-	if(typeof(console) != 'undefined')
-		{
-			console.log(arg);
-		}
-*/
-}
-		
+	
 //function gb2312callback(resText, userData)
 //{
 //	//http://ftp.modabo.cn/%B8%E8%C7%FA/ %B1%B1 %BE%A9 %BB%B6 %D3%AD %C4%E3.mp3

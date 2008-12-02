@@ -9,6 +9,8 @@ var AmuseServer = {
 		CLIENT_LOADMP3: '2',
 		CLIENT_CHECK_VERSION:'3',
 		CLIENT_SEARCHTRACK: '4',
+		CLIENT_SEARCHLYRIC: '5',
+		CLIENT_LOADLYRIC: '6',
 		EXTENSION_VERSION:'2.0',
 		debugMode:false,
 		logfile:null,
@@ -115,6 +117,7 @@ var AmuseServer = {
 		   		break;
 		  
 		  case AmuseServer.CLIENT_SEARCHTRACK:
+		  case AmuseServer.CLIENT_SEARCHLYRIC:
 					AmuseDebugOut2("[clientEventHandler]CLIENT_SEARCHTRACK param:"+ param);
 					if(flag == 2) {
 						var u = param.match(/@[^@]*@/)[0].split('@')[1];
@@ -126,14 +129,36 @@ var AmuseServer = {
 					} 
 					AmuseDebugOut2(param);
 					//param = 'http://mp3.baidu.com/m?f=ms&tn=baidump3&ct=134217728&lm=0&word=%D0%ED%CE%A1'
-		   		AmuseServer.getData(param,	
-				  				flag == 0 ? AmuseServer.searchTrackCallback_Google : 
-				  				flag == 1 ? AmuseServer.searchTrackCallback_Yahoo :
-				  				flag == 2 ? AmuseServer.searchTrackCallback_Baidu : null,
-				  				 
-		   						node, encode);
+					if(cmd == AmuseServer.CLIENT_SEARCHTRACK ) {
+						AmuseServer.getData(param,	
+					  				flag == 0 ? AmuseServer.searchTrackCallback_Google : 
+					  				flag == 1 ? AmuseServer.searchTrackCallback_Yahoo :
+					  				flag == 2 ? AmuseServer.searchTrackCallback_Baidu : null,
+					  				 
+			   						node, encode);
+		   		}
+		   		else {
+						AmuseServer.getData(param,	
+		  				flag == 0 ? AmuseServer.searchLyricUrlCallback_Google : 
+		  				flag == 1 ? AmuseServer.searchLyricUrlCallback_Yahoo :
+		  				flag == 2 ? AmuseServer.searchLyricUrlCallback_Baidu : null,
+		  				 
+	 						node, encode);
+
+		   		}
 		   		break;	
-		  	
+		   		
+		   case AmuseServer.CLIENT_LOADLYRIC:
+		   	var data = null;
+		   	AmuseDebugOutLyrics("[clientEventHandler]CLIENT_LOADLYRIC: param:" +  param);
+		   	if(flag == 0) {
+		   		data = AmuseGoogle.loadSearchLyric(param, encode);
+		  	} else if (flag == 2) {
+			   	data = AmuseBaidu.loadSearchLyric(param, encode);
+		  	}
+		   	AmuseServer.postEvent(node, data);
+		   	break;
+		  		
 		  	default:
 		  		alert("unkown agent cmd: " + cmd);
 		  }  	
@@ -148,31 +173,51 @@ var AmuseServer = {
 		},
 	
 		getData: function(url, callback, userData, encode) {
-			var httpRequest = null;
-			
-			if(url == null) return;
-			
-			function onLoad(evt)
-			{
-				var respData = httpRequest.responseText;
-				if(respData.length)
-				{
-					callback(respData, userData);
-				}
-			}
-			try {
-				httpRequest = new XMLHttpRequest();
-				httpRequest.open("GET", url, true);	
-				httpRequest.onload = onLoad;
-				if(encode)
-					httpRequest.overrideMimeType(encode);
-					
-				httpRequest.send(null);
-			} catch(e){
-				AmuseDebugOut("[Execption] getData: url:" + url);
-				}
-			
+			//AmuseUtil.XHRAsync(url, encode, callback, userData);
+			callback(AmuseUtil.XHRSync(url, encode), userData);
 		},
+		
+//		getData2: function(url, callback, userData, encode) {
+//			var httpRequest = null;
+//			
+//			if(url == null) return;
+//			
+//			function onLoad(evt)
+//			{
+//				var respData = httpRequest.responseText;
+//				if(respData.length)
+//				{
+//					callback(respData, userData);
+//					httpRequest = null;
+//				}
+//			}
+//			try {
+//				httpRequest = new XMLHttpRequest();
+//				
+//				httpRequest.open("GET", url, true);	
+//				httpRequest.onload = onLoad;
+//				if(encode)
+//					httpRequest.overrideMimeType(encode);
+//					
+//				httpRequest.send(null);
+//				
+//				/*
+//				httpRequest = new XMLHttpRequest();
+//				httpRequest.open("GET", url, false);	
+//				if(encode)
+//					httpRequest.overrideMimeType(encode);	
+//				httpRequest.send(null);
+//				if(httpRequest.status == 200) {
+//					callback(httpRequest.responseText, userData);
+//				}
+//				httpRequest = null;
+//				*/
+//			} catch(e){
+//				httpRequest = null;
+//				AmuseDebugOut("[Execption] getData: url:" + url);
+//				}
+//			
+//		},
 			
 		loadListCallback_Baidu: function(resText, userData) {
 				var data = AmuseBaidu.parseTrackList(resText, 0);
@@ -181,7 +226,7 @@ var AmuseServer = {
 		},
 		
 		loadTrackCallback_Baidu: function(resText, userData) {
-			var data = AmuseBaidu.parseTrack(resText, 5, false);
+			var data = AmuseBaidu.parseTrack(resText, 5, true);
 			AmuseServer.postEvent(userData, data);
 			data = null;
 		},
@@ -244,6 +289,15 @@ var AmuseServer = {
 			data = null;
 	},
 	
+	searchLyricUrlCallback_Google: function(resText, userData) {
+		
+	},
+
+	searchLyricUrlCallback_Baidu: function(resText, userData) {
+	},
+
+	searchLyricUrlCallback_Yahoo: function(resText, userData) {
+	},
 	
 }
 

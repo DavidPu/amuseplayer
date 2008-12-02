@@ -1,5 +1,7 @@
+function $(el) { return document.getElementById(el);}
 function AmuseDebugOut2(arg){AmuseDebugOut(arg);}
-function AmuseDebugOut(arg)
+function AmuseDebugOut(arg){}
+function AmuseDebugOutLyrics(arg)
 {
 	dump(arg + "\n");
 	
@@ -7,7 +9,6 @@ function AmuseDebugOut(arg)
 	{
 		console.log(arg);
 	}
-	
 }
 
 var AmuseAgent = {
@@ -19,8 +20,11 @@ var AmuseAgent = {
 			CLIENT_LOADMP3: '2',
 			CLIENT_CHECK_VERSION: '3',
 			CLIENT_SEARCHTRACK: '4',
+			CLIENT_SEARCHLYRIC:'5',
+			CLIENT_LOADLYRIC: '6',
 			EXTENSION_VERSION:null,
 			PAGE_SIZE: 25,
+			MP3_URL_DIS_LEN:54,
 			data:null,
 			data_index:0,
 			tracklist:null,
@@ -70,7 +74,7 @@ var AmuseAgent = {
 			
 			onLoadTrack: function(data, index) {
 				AmuseAgent.tracklist.crypturls = null;
-				AmuseAgent.tracklist[index].crypturls = eval(data);
+				AmuseAgent.tracklist[index].crypturls = JSON.parse(data);//eval(data);
 				AmuseAgent.tracklist[index].tryindex = 0;
 				AmuseDebugOut("[onLoadTrack]:" + AmuseAgent.tracklist[0]);
 				AmuseAgent.loadMp3(index);
@@ -283,7 +287,7 @@ var AmuseAgent = {
 			//alert("onServerDoneCallback: " + data);
 			var dataStore = gridPanel.store;
 			
-			AmuseAgent.data = eval(data);
+			AmuseAgent.data = JSON.parse(data);//eval(data);
 			AmuseAgent.data_index = 0;
 			var cnt = AmuseAgent.data.length > AmuseAgent.PAGE_SIZE ? AmuseAgent.PAGE_SIZE: AmuseAgent.data.length;
 			dataStore.loadData(AmuseAgent.data.slice(AmuseAgent.data_index, AmuseAgent.data_index + cnt), false);
@@ -321,33 +325,49 @@ var AmuseAgent = {
 		loadMp3: function(index) {
 			AmuseDebugOut("[loadMp3]index: " + index);
 			
-			if(index < AmuseAgent.tracklist.length)
+			if(index >= AmuseAgent.tracklist.length -1 ) 
 			{
-				var track = AmuseAgent.tracklist[index];
-				AmuseDebugOut2("[loadMp3]track: " + track);
-				if(!AmuseAgent.bSearchMode)
+				return -1;
+			}
+			
+			var track = AmuseAgent.tracklist[index];
+			AmuseDebugOut2("[loadMp3]track: " + track);
+			if(!AmuseAgent.bSearchMode)
+			{
+				if(track && track.tryindex < track.crypturls.length)
 				{
-					if(track.tryindex < track.crypturls.length)
+					
+					var crypturl = track.crypturls[track.tryindex][1];
+					if(crypturl)
 					{
-						
-						var crypturl = track.crypturls[track.tryindex][1];
-						if(crypturl)
-						{
-							AmuseDebugOut("[loadMp3]crypturl: " + crypturl);
-							AmuseAgent.talkToServer(AmuseAgent.CLIENT_LOADMP3, crypturl, index);
-						}
+						AmuseDebugOut("[loadMp3]crypturl: " + crypturl);
+						AmuseAgent.talkToServer(AmuseAgent.CLIENT_LOADMP3, crypturl, index);
 					}
-					else
-					{
-						AmuseAgent.playNext();
-					}	
 				}
 				else
 				{
-					AmuseDebugOut2("[loadMp3] track.queryurl: " +  track.queryurl);
-					AmuseAgent.talkToServer(AmuseAgent.CLIENT_LOADMP3, track.queryurl, index);
+					AmuseAgent.playNext();
+				}	
+			}
+			else
+			{
+				AmuseDebugOut2("[loadMp3] track.queryurl: " +  track.queryurl);
+				if(AmuseAgent.data && AmuseAgent.data_index + index < AmuseAgent.data.length) {
+					AmuseDebugOut2("%%%[loadMp3] lyricurl: " +  AmuseAgent.data[AmuseAgent.data_index + index][2]);
 				}
+				AmuseAgent.talkToServer(AmuseAgent.CLIENT_LOADMP3, track.queryurl, index);
+			}
+			return 1;
 				
+			
+		},
+		
+		LoadNextMp3Url: function() {
+			var sId = AmuseSound.s_id;
+			AmuseSound.reset();
+			var ret = AmuseAgent.loadMp3(sId);
+			if(ret == -1) {
+				AmuseAgent.playNext();
 			}
 		},
 		
@@ -355,7 +375,7 @@ var AmuseAgent = {
 			AmuseAgent.tracklist[index].tryindex++;
 			//alert("onLoadMp3:" + mp3url);
 			mp3url = mp3url.split('"')[1];
-			if(mp3url.length == 0)
+			if(!mp3url && mp3url.length == 0)
 			{
 				AmuseDebugOut("[onLoadMp3] mp3url.length " + mp3url.length);
 				if(AmuseSound.tryUrlCnt < AmuseSound.s_MaxTryCnt) {
@@ -372,18 +392,47 @@ var AmuseAgent = {
 											AmuseAgent.tracklist[index].soundname.substring(0,35) :
 											AmuseAgent.tracklist[index].soundname;
 			playerPanel.setTitle("Title:" + soundname);
+			document.title = soundname;
 			var el = document.getElementById('trackInfo');
 			//AmuseDebugOut("[onLoadMp3] mp3url.length " + mp3url.length);
-			if(mp3url.length >= 60)
+			if(mp3url.length >= AmuseAgent.MP3_URL_DIS_LEN)
 			{
-				el.innerHTML = '<a onclick="showDownloadTips(); return false;" href="' + mp3url + '>MP3\u6765\u6e90:' + mp3url.substring(0,60) +
+				el.innerHTML = '<a onclick="showDownloadTips(); return false;" href="' + mp3url + '>\u6765\u6e90:' + mp3url.substring(0,AmuseAgent.MP3_URL_DIS_LEN) +
 											' ..... '+ '.mp3</a>';
 			}
 			else if(mp3url.length > 1 )
 			{
 					el.innerHTML = '<a onclick="showDownloadTips(); return false;"  href="' + mp3url + '>MP3\u6765\u6e90:' + mp3url + '</a>';
 			}
+			if(!AmuseAgent.bSearchMode) {
+				el.innerHTML += '<span>&nbsp;&nbsp;&nbsp;</span><a onclick="reselectMp3Url(); return false;" href="">\u91cd\u9009\u94fe\u63a5</a>'
+			}
 			AmuseSound.createSound(index, mp3url, true);
+			
+			/* load lyric */
+			$('lyricInfo').innerHTML = "~~";
+			AmuseLyric.resetLyric();
+			var lyricurl = null;
+			var idx = parseInt(index);
+			if(AmuseAgent.bSearchMode) {
+				if(AmuseAgent.data[AmuseAgent.data_index + idx]) {
+					var lyricurl = AmuseAgent.data[AmuseAgent.data_index + idx][2];
+					AmuseDebugOutLyrics("****[loadMp3]bSearchMode lyricurl: " + lyricurl);
+				}
+			} else {
+				var track = AmuseAgent.tracklist[idx];
+				//FIXME::::
+				if(/google/.test(track.queryurl)) {
+					lyricurl = track.queryurl;
+				} else {
+					lyricurl = track.crypturls[track.tryindex][2];
+				}
+			}			
+			if(lyricurl) {
+				AmuseDebugOutLyrics("****[loadMp3]lyricurl: " + lyricurl);
+				AmuseAgent.talkToServer(AmuseAgent.CLIENT_LOADLYRIC, lyricurl);
+			}
+			
 			
 		},
 		
@@ -428,7 +477,23 @@ var AmuseAgent = {
 			}
 			
 		},
+	
+		searchLyric: function(unicodeKeywords) {
+			var searchurl = 'http://mp3.baidu.com/m?f=ms&tn=baidump3lyric&ct=150994944&lf=2&rn=10&lm=-1&word=@'+ unicodeKeywords + '@';
+			AmuseDebugOut2("[searchLyric]searchurl: " + searchurl);
+			AmuseAgent.talkToServer(AmuseAgent.CLIENT_SEARCHLYRIC, searchurl);
+		},
 		
+		onLoadSearchLyric: function(data) {
+			if(typeof(data) !='undefined' && data.length > 0) {
+				var lyric_data =  JSON.parse(data);
+				if(lyric_data && lyric_data[0] && lyric_data[0].data) {
+					AmuseDebugOutLyrics("[onLoadSearchLyric] lyric_data:" + lyric_data[0].data);
+					AmuseLyric.loadLyric(lyric_data[0].data);
+				}
+			}
+		},
+			
 		AmuseCommBackEvtHandler:function(evt){
 			var node = evt.target;
 			var data = decodeURIComponent(node.getAttribute("data"));
@@ -464,7 +529,10 @@ var AmuseAgent = {
 						//AmuseAgent.bSearchMode = true;
 						AmuseAgent.onsearchTrack(data);
 						break;
-												
+					case AmuseAgent.CLIENT_LOADLYRIC:
+						AmuseAgent.onLoadSearchLyric(data);
+						break;
+													
 					default:
 						alert("unkown cmd: " + cmd);
 						break;
@@ -472,6 +540,9 @@ var AmuseAgent = {
 		}
 }
 
+function reselectMp3Url() {
+	AmuseAgent.LoadNextMp3Url();
+	}
 
 function redirect_oldVersion()
 {

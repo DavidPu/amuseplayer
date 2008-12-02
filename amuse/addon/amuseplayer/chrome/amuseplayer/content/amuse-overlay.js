@@ -18,7 +18,6 @@ function loadAmusePlayer() {
     var func = function () { gBrowser.setIcon(theTab, "chrome://amuseplayer/skin/icons/logo.png"); };
     setTimeout(func, 500);
   } else {
-  	alert('aa');
   	toOpenWindowByType('mozilla:AmusePlayer', 'chrome://amuseplayer/content/extamuse.xul');
   }
 }

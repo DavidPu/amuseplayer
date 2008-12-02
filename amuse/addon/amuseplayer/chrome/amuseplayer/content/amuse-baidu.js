@@ -34,12 +34,15 @@ var AmuseBaidu = {
 	/*
 	* Input: html page data.
 	* Input: limited size. no limit if 0.
-	* Output: array of [[crypt url, track--full-name]];
+	* Output: array of [[track--full-name, crypt url]];
 	*/
 	parseTrack:function(resText, limit, bKeepFullName) {
 		if(limit <= 0) limit = 65535;
 		var regExp = /http:\/\/box.zhangmen.baidu.com\/m\?gate=1&ct=\d+&tn=baidumt[^&]+&word=mp3[^\"]+/g;
 		var urls = resText.match(regExp);
+		
+		var regExpLyrics = /http:\/\/mp3.baidu.com\/m\?tn=baidump3lyric[^\"|^>]*/g;
+		var Lyrics = resText.match(regExpLyrics);
 		if(urls == null){
 			return;
 		}
@@ -54,8 +57,11 @@ var AmuseBaidu = {
 				
 				trackname = url.split('=baidumt,')[1];
 				trackname = trackname.split('&word')[0];
-				//AmuseDebugOut("[AmuseBaidu.parseTrack] trackname: " + encodeURIComponent(trackname));				
-				data.push([trackname,url]);
+				//AmuseDebugOut("[AmuseBaidu.parseTrack] trackname: " + encodeURIComponent(trackname));			
+				var lyricUrl = null;
+				if(Lyrics	&& Lyrics[i]) lyricUrl =  Lyrics[i];
+				data.push([trackname,url, lyricUrl]);
+				AmuseDebugOutLyrics("~~~[parseTrack]" + lyricUrl);
 			}
 		} else {
 			for(var i = 0; i < urls.length && i < limit; i++)
@@ -63,7 +69,13 @@ var AmuseBaidu = {
 				var url = urls[i];
 				url = url.replace(/&lm=-1/g, "&lm=0")
 				AmuseDebugOut("[AmuseBaidu.parseTrack] url: " + url);
-				data.push(['',url]);
+						
+				var lyricUrl = null;
+				if(Lyrics	&& Lyrics[i]) { 
+					lyricUrl =  Lyrics[i];
+				}
+				data.push(['',url, lyricUrl]);
+				AmuseDebugOutLyrics("~~~[parseTrack]" + lyricUrl);
 			}
 		}
 		return data;
@@ -84,4 +96,32 @@ var AmuseBaidu = {
 			urlscript = Components.utils.evalInSandbox(urlscript, AmuseBaidu.gSandbox);
 			return urlscript;
 		},
+		
+	parseLrcUrlList: function(resText) {
+		var regExp = /LRC[^http]*http[^<]*<\/a>/g;
+		var lrcurls = resText.match(regExp);
+		var data = [];
+		for(var i = 0; i < lrcurls.length; i++) {
+			var url = 'http' + lrcurls[i].split('http')[1].split('</a>')[0];
+			data.push({url:url, data:null});
+		}
+		for(var i = 0; i < data.length; i++) {
+			var lrc_data = AmuseUtil.XHRSync(data[i].url, 'text/plain; charset=GB2312');
+			if(/[\d\d:\d\d.\d\d]/.test(lrc_data)) {
+				data[i].data = lrc_data;
+				AmuseDebugOutLyrics(AmuseUtil.toHex(lrc_data));
+				AmuseDebugOutLyrics("======================");
+				AmuseDebugOutLyrics(AmuseUtil.toHex(FileIO.toUnicode('GB2312', lrc_data)));
+				break;
+			} else {
+				data.splice(0,1);
+			}
+		}
+		return data;
+		
+	},
+	
+	loadSearchLyric: function(lyricUrl, encode) {
+		return AmuseBaidu.parseLrcUrlList(AmuseUtil.XHRSync(lyricUrl, encode));
+	},	
 };
