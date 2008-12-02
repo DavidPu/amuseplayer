@@ -74,7 +74,7 @@ var AmuseSound = {
 		soundobj = soundManager.getSoundById(AmuseSound.s_id);
 		if(soundobj)
 		{
-			AmuseDebugOut('[zombieKiller]readyState:' +soundobj.readyState);
+			//AmuseDebugOut('[zombieKiller]readyState:' +soundobj.readyState);
 			/*
 			0 = uninitialised
 	    	1 = loading
@@ -82,17 +82,17 @@ var AmuseSound = {
 	    	3 = loaded/success
 			*/
 			AmuseSound.s_state = soundobj.readyState;
-			AmuseDebugOut('[zombieKiller]readyState:' +soundobj.readyState);
+			//AmuseDebugOut('[zombieKiller]readyState:' +soundobj.readyState);
 			switch(soundobj.readyState)
 			{
 			case 0:
 				break;
 			case 1:
-				AmuseDebugOut('[zombieKiller]bytesLoaded:' + soundobj.bytesLoaded);
+				//AmuseDebugOut('[zombieKiller]bytesLoaded:' + soundobj.bytesLoaded);
 				if(AmuseSound.s_bytesLoaded == soundobj.bytesLoaded || soundobj.bytesLoaded == null)
 				{
-					AmuseSound.tryLoadCnt++;
-					AmuseDebugOut('[zombieKiller]AmuseSound.tryLoadCnt:' + AmuseSound.tryLoadCnt);
+					AmuseSound.tryLoadCnt += 1;
+					//AmuseDebugOut('~~~[zombieKiller]AmuseSound.tryLoadCnt:' + AmuseSound.tryLoadCnt);
 				}
 				else
 				{
@@ -106,15 +106,15 @@ var AmuseSound = {
 				if(soundobj.bytesLoaded == null || soundobj.duration == 0)
 				{
 					AmuseSound.tryLoadCnt = AmuseSound.s_MaxTryCnt;
-					AmuseDebugOut('[zombieKiller]AmuseSound.tryLoadCnt:' + AmuseSound.tryLoadCnt);
+					//AmuseDebugOut('[zombieKiller]AmuseSound.tryLoadCnt:' + AmuseSound.tryLoadCnt);
 					
 				}
 				else
 				{
 					AmuseSound.s_duration = soundobj.duration;
 				}
-				AmuseDebugOut('[zombieKiller]duration:' + soundobj.duration);
-				AmuseDebugOut('[zombieKiller]AmuseSound.s_duration:' + AmuseSound.s_duration);
+				//AmuseDebugOut('[zombieKiller]duration:' + soundobj.duration);
+				//AmuseDebugOut('[zombieKiller]AmuseSound.s_duration:' + AmuseSound.s_duration);
 				break;
 			}
 			
@@ -123,8 +123,12 @@ var AmuseSound = {
 				soundManager.destroySound(AmuseSound.s_id);
 				if(AmuseSound.tryUrlCnt < 3)
 				{
-					AmuseAgent.loadMp3(AmuseSound.s_id);
-					AmuseSound.tryUrlCnt++;
+					var ret = AmuseAgent.loadMp3(AmuseSound.s_id);
+					if(ret == 1 && !AmuseAgent.bSearchMode){
+						AmuseSound.tryUrlCnt++;
+					} else {
+						AmuseAgent.playNext();
+					}
 					g_ProgressBar.updateProgress(0.0, "Oops...");
 				}
 				else
@@ -138,14 +142,14 @@ var AmuseSound = {
 		}
 		else
 		{
-			AmuseDebugOut('[zombieKiller] no sound obj.');
+			//AmuseDebugOut('[zombieKiller] no sound obj.');
 			AmuseAgent.playNext();
 			AmuseSound.timer = setTimeout(AmuseSound.zombieKiller, 10000);	
 		}
 	},
 	
 	createSound: function(soundID, url, bAutoPlay) {
-		AmuseDebugOut("createSound:"+ url);
+		//AmuseDebugOut("createSound:"+ url);
 		AmuseSound.stopzombieKiller();
 		var sId = soundManager.createSound(
 		{
@@ -157,6 +161,7 @@ var AmuseSound = {
 		});	
 		soundManager.setVolume(soundID, AmuseSound.s_volume);
 		AmuseSound.startzombieKiller(soundID);
+		AmuseLyric.resetLyric();
 	},
 	
 	playSound: function(id) {
@@ -175,7 +180,7 @@ var AmuseSound = {
 	},
 	
 	whileloading: function() {
-			//AmuseDebugOut('whileloading: bytesLoaded: ' + this.bytesLoaded + '  bytesTotal:' + this.bytesTotal);
+			////AmuseDebugOut('whileloading: bytesLoaded: ' + this.bytesLoaded + '  bytesTotal:' + this.bytesTotal);
 			/* make CPU loading happy */
 			if(this.bytesLoaded & 0x2000)
 			{
@@ -187,10 +192,10 @@ var AmuseSound = {
 	},
 	
 	whileplaying:function() {
-		//AmuseDebugOut('sound '+this.sID+' playing, '+this.position+' of '+this.duration);
+		////AmuseDebugOut('sound '+this.sID+' playing, '+this.position+' of '+this.duration);
 		if(this.position == this.duration)
 		{
-			AmuseDebugOut('sound ' + this.sID + ' Ooops!');
+			//AmuseDebugOut('sound ' + this.sID + ' Ooops!');
 			AmuseSound.tryLoadCnt++;
 			//AmuseDebugOut('sound ' + AmuseSound.tryLoadCnt + ' Ooops!');
 		}
@@ -199,8 +204,19 @@ var AmuseSound = {
 			/* make CPU loading happy */
 			if(this.position & 0x2000)
 			{
-				//AmuseDebugOut("[whileplaying]g_ProgressBar:" + g_ProgressBar);
+				////AmuseDebugOut("[whileplaying]g_ProgressBar:" + g_ProgressBar);
 				g_ProgressBar.updateProgress(this.position / this.duration, 'playing:' + parseInt(this.position / 1000) + ":" + parseInt(this.duration / 1000) + ' Sec.');
+			}
+			var lyric = AmuseLyric.syncLyric(this.position);
+			if(lyric[0]) {
+				var node = document.getElementById('lyricInfo');
+				if(lyric[3] & 0x1) {
+				node.innerHTML = '<span style="background-color:rgb(255, 255, 215);">' + lyric[1] + '</span><br/>'+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>' + lyric[2] + '</span>';
+				}
+				else {
+					node.innerHTML = '<span>' + lyric[2] + '</span><br/>'+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color:rgb(255, 255, 215);">' + lyric[1] + '</span>';
+				}
+				document.title = lyric[1];
 			}
 		}
 	},

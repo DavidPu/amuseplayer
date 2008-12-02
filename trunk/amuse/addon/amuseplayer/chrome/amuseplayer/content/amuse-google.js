@@ -54,4 +54,16 @@ var AmuseGoogle = {
 		mp3url = resText.match(regExp);
 		return mp3url;
 	},
+	loadSearchLyric: function(lyricUrl, encode) {
+		var tmp;
+		var data = [];
+		AmuseDebugOutLyrics("===gooole===================" + lyricUrl);
+		tmp = AmuseUtil.XHRSync(lyricUrl, encode);
+		var lrc = tmp.match(/http:\/\/lyric.[\S]*.lrc/g);
+		if(lrc) {
+			data.push({url:tmp, data:AmuseUtil.XHRSync(lrc, encode)});
+		}
+		AmuseDebugOutLyrics(data[0].data);
+		return data;
+	},
 };
