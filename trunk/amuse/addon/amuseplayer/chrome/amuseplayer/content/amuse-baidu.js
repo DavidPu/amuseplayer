@@ -109,9 +109,10 @@ var AmuseBaidu = {
 			var lrc_data = AmuseUtil.XHRSync(data[i].url, 'text/plain; charset=GB2312');
 			if(/[\d\d:\d\d.\d\d]/.test(lrc_data)) {
 				data[i].data = lrc_data;
-				AmuseDebugOutLyrics(AmuseUtil.toHex(lrc_data));
-				AmuseDebugOutLyrics("======================");
-				AmuseDebugOutLyrics(AmuseUtil.toHex(FileIO.toUnicode('GB2312', lrc_data)));
+				AmuseDebugOutLyrics("[AmuseBaidu.parseLrcUrlList] lrc:" + data[i].url);
+				//AmuseDebugOutLyrics(AmuseUtil.toHex(lrc_data));
+				//AmuseDebugOutLyrics("======================");
+				//AmuseDebugOutLyrics(AmuseUtil.toHex(FileIO.toUnicode('GB2312', lrc_data)));
 				break;
 			} else {
 				data.splice(0,1);
