@@ -488,7 +488,7 @@ var AmuseAgent = {
 			if(typeof(data) !='undefined' && data.length > 0) {
 				var lyric_data =  JSON.parse(data);
 				if(lyric_data && lyric_data[0] && lyric_data[0].data) {
-					AmuseDebugOutLyrics("[onLoadSearchLyric] lyric_data:" + lyric_data[0].data);
+					AmuseDebugOutLyrics("[onLoadSearchLyric] lyric_data:" + lyric_data[0].url);
 					AmuseLyric.loadLyric(lyric_data[0].data);
 				}
 			}

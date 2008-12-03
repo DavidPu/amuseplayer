@@ -62,8 +62,9 @@ var AmuseGoogle = {
 		var lrc = tmp.match(/http:\/\/lyric.[\S]*.lrc/g);
 		if(lrc) {
 			data.push({url:tmp, data:AmuseUtil.XHRSync(lrc, encode)});
+			AmuseDebugOutLyrics("[AmuseGoogle.loadSearchLyric] lrc:" + lrc);
 		}
-		AmuseDebugOutLyrics(data[0].data);
+		//AmuseDebugOutLyrics(data[0].data);
 		return data;
 	},
 };

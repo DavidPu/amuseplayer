@@ -1,4 +1,11 @@
-﻿//////////////////
+﻿// ==UserScript==
+// @name           lyric-sync
+// @namespace      http://www.amuseplayer.com/
+// @description    lyric-sync
+// @include        http://www.google.com/firefox?client=firefox-a&rls=org.mozilla:en-US:official
+// ==/UserScript==
+
+//////////////a////
 var test_lyric = "[ti:彩虹]\n"+
 "[ar:许巍]\n"+
 "[al:]\n"+
@@ -69,8 +76,10 @@ var test_lyric2 = "[01:41.00][00:15.00]灯亮起来\n"+
 //////////////////////////////
 
 var AmuseLyric = {
-	LyricData:null,
 	Index:0,
+	////////
+	Text:null,
+	TimeLine:null,
 	
 	loadLyric: function(lyric_param) {
 		var lyric = lyric_param;//test_lyric;
@@ -79,52 +88,90 @@ var AmuseLyric = {
 		
 		if(!strings) return ;
 		
+		function str2Int(a, b) { return parseInt(a) * 10 + parseInt(b);}
+		
+		AmuseLyric.Text = [];
+		AmuseLyric.TimeLine = [];
+		AmuseLyric.Index = 0;
+		
 		var timestamp;
 		var text;
-		AmuseLyric.LyricData = [];
-		AmuseLyric.Index = 0;
-		function str2Int(a, b) { return parseInt(a) * 10 + parseInt(b);}
+		var idx = 0;
 		for(var i = 0; i < strings.length; i++)
 		{
-			
 			timestamp = str2Int(strings[i].charAt(1), strings[i].charAt(2)) * 60000;
 			timestamp += str2Int(strings[i].charAt(4), strings[i].charAt(5)) * 1000;
 			timestamp += str2Int(strings[i].charAt(7), strings[i].charAt(8)) * 10;
-			text = strings[i].split(']')[1];
-			AmuseDebugOutLyrics(text);
-			AmuseLyric.LyricData.push([timestamp, text.split('\n')[0]]);
+			var j = 0;
+			for(j = 0; j < AmuseLyric.TimeLine.length &&
+						timestamp > AmuseLyric.TimeLine[j].time; j++) {
+				;
+			}
+			AmuseLyric.TimeLine.splice(j, 0, {time:timestamp, idx:idx});
+			
+			if(strings[i].length > 10) {
+				text = strings[i].split(']')[1].split('\n')[0];
+				AmuseDebugOutLyrics('~~~ ' + text);
+				AmuseLyric.Text.push(text);
+				idx++;
+			}
 		}
+		for(var i = 0; i < AmuseLyric.Text.length; i++) {
+			AmuseDebugOutLyrics('*** ' + AmuseLyric.Text[i]);
+		}
+		
 	},
 	
-	/* return [boolean, text] */
 	syncLyric: function(timems) {
-		if(!AmuseLyric.LyricData) return "";
+		if(!AmuseLyric.TimeLine || !AmuseLyric.Text) return [false, ""];
 		
-		if(	timems < AmuseLyric.LyricData[AmuseLyric.Index][0] ||
-				timems >= AmuseLyric.LyricData[AmuseLyric.LyricData.length - 1][0]) {
-				var changed = (AmuseLyric.Index == 0 || AmuseLyric.Index == AmuseLyric.LyricData.length - 1);
+		var syncTime =  AmuseLyric.TimeLine[AmuseLyric.Index].time;
+		var syncTextId = AmuseLyric.TimeLine[AmuseLyric.Index].idx;
+		function prepareRet(offset) { 
+			var next = AmuseLyric.Index + 1;
+			if(next >= AmuseLyric.TimeLine.length) next = -1;
+			return [true, AmuseLyric.Text[ AmuseLyric.TimeLine[AmuseLyric.Index + offset].idx ], 
+					next != -1 ? AmuseLyric.Text[ AmuseLyric.TimeLine[AmuseLyric.Index + 1 + offset].idx ] : '$' , 
+					next != -1 ? AmuseLyric.Index : -1];
+		}
+		
+		if(	timems < syncTime ||
+				timems >= AmuseLyric.TimeLine[AmuseLyric.TimeLine.length - 1].time) {
+				var changed = (AmuseLyric.Index == 0 || AmuseLyric.Index == AmuseLyric.TimeLine.length - 1);
 				if(changed) {
-					return [true, AmuseLyric.Index, AmuseLyric.LyricData[AmuseLyric.Index][1], 
-												AmuseLyric.Index + 1 < AmuseLyric.LyricData.length ?
-												AmuseLyric.LyricData[AmuseLyric.Index + 1][1] : '' , AmuseLyric.Index];
+					return prepareRet(0);
 				} else {
-					return [false, ''];
+					return [false, '$', '$', -1];
 				}
 			}
 		
-		while(timems >= AmuseLyric.LyricData[AmuseLyric.Index][0]) {
+		while(timems >= AmuseLyric.TimeLine[AmuseLyric.Index].time) {
 			AmuseLyric.Index++;
-		}
-		return [true, AmuseLyric.LyricData[AmuseLyric.Index - 1][1],
-									AmuseLyric.Index < AmuseLyric.LyricData.length ?
-									AmuseLyric.LyricData[AmuseLyric.Index][1] : '', AmuseLyric.Index];
+		}	
+		return prepareRet(-1); 
 	},
+	
 	
 	resetLyric: function() {
 		AmuseLyric.Index = 0;
-		AmuseLyric.LyricData = null;
+		AmuseLyric.TimeLine = null;
+		AmuseLyric.Text = null;
 	},
 	
 };
 
-//AmuseLyric.loadLyric();
+var ticks = 0;
+var timer = 0;
+function www() {
+	ticks += 200;
+	var tmp = AmuseLyric.syncLyric(ticks);
+	if(tmp[0]) {
+		AmuseDebugOutLyrics('ticks:' + ticks + " " + tmp[1] + " " + tmp[3]);
+		if(tmp[3] == -1) {
+			clearInterval(timer);
+		}
+	}
+	
+}
+//AmuseLyric.loadLyric(test_lyric2);
+//timer = setInterval(www, 50);
