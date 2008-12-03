@@ -173,8 +173,8 @@ var AmuseServer = {
 		},
 	
 		getData: function(url, callback, userData, encode) {
-			//AmuseUtil.XHRAsync(url, encode, callback, userData);
-			callback(AmuseUtil.XHRSync(url, encode), userData);
+			AmuseUtil.XHRAsync(url, encode, callback, userData);
+			//callback(AmuseUtil.XHRSync(url, encode), userData);
 		},
 		
 //		getData2: function(url, callback, userData, encode) {
