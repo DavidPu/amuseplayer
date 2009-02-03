@@ -1,14 +1,18 @@
-function AmuseDebugOut(arg){AmuseDebugOut2(arg);}
-function AmuseDebugOut2(arg){}
-function AmuseDebugOutLyrics(arg)
+function $(el) { return document.getElementById(el);}
+function AmuseDebugOut2(arg){AmuseDebugOut(arg);}
+function AmuseDebugOutLyrics(arg){/*AmuseDebugOut(arg);*/}
+function AmuseDebugOutSaveData(arg){/*AmuseDebugOut(arg);*/}
+
+function AmuseDebugOut(arg){}
+
+function AmuseDebugOut_AA(arg)
 {
-
-	dump(arg +"\n");
+	dump(arg + "\n");
+	
 	if(typeof(console) != 'undefined')
-		{
-			console.log(arg);
-		}
-
+	{
+		console.log(arg);
+	}
 }
 	
 	

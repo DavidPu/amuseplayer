@@ -82,7 +82,7 @@ var AmuseSound = {
 	    	3 = loaded/success
 			*/
 			AmuseSound.s_state = soundobj.readyState;
-			//AmuseDebugOut('[zombieKiller]readyState:' +soundobj.readyState);
+			AmuseDebugOut('[zombieKiller]readyState:' +soundobj.readyState);
 			switch(soundobj.readyState)
 			{
 			case 0:
@@ -142,7 +142,7 @@ var AmuseSound = {
 		}
 		else
 		{
-			//AmuseDebugOut('[zombieKiller] no sound obj.');
+			AmuseDebugOut('[zombieKiller] no sound obj.');
 			AmuseAgent.playNext();
 			AmuseSound.timer = setTimeout(AmuseSound.zombieKiller, 10000);	
 		}
@@ -209,7 +209,7 @@ var AmuseSound = {
 			}
 			var lyric = AmuseLyric.syncLyric(this.position);
 			if(lyric[0]) {
-				var node = document.getElementById('lyricInfo');
+				var node = $('lyricInfo');
 				if(lyric[3] & 0x1) {
 				node.innerHTML = '<span style="background-color:rgb(255, 255, 215);">' + lyric[1] + '</span><br/>'+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>' + lyric[2] + '</span>';
 				}

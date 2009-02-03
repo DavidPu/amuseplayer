@@ -7,11 +7,19 @@ var AmuseBaidu = {
 	*/
 	parseTrackList: function(resText, limit) {
 		if(limit <= 0) limit = 65535;
-	
-		var trackReg = /href=\"http:\/\/mp3.baidu.com\/m\?(f=ms&)?tn=baidump3&[\S]+\"/g;
-		var tracks = resText.match(trackReg);
+	//http://mp3.baidu.com/m?tn=baidump3&ct=134217728&lf=&rn=&lm=-1&li=82&word=%C3%F7%D4%C2%BC%B8%CA%B1%D3%D0%20%20%B2%CC%C7%D9
+		var trackReg = [
+										/><a href=\"http:\/\/mp3.baidu.com\/m\?[^\"]*tn=baidump3&[^\"]+\"/ig,
+										/href=\"http:\/\/mp3.baidu.com\/m\?[^\"]*tn=baidump3&[^\"]+\"/g,
+										];
+		var tracks = null;
 		var Idx = 0;
 		var data = new Array();
+		
+		for(var i = 0; i < trackReg.length && tracks == null; i++)
+		{
+			tracks = resText.match(trackReg[i]);
+		}
 		
 		for(var i = 0; i < tracks.length && i < limit; i++)
 		{
@@ -19,11 +27,23 @@ var AmuseBaidu = {
 			{
 				var track = tracks[i].split("&word=")[1];
 				track = track.split("\"")[0];
-				var trackname = AmuseUtil.URL2Unicode('GB2312', track);
+				var trackname;
+				var trackurl;
+				if(track.indexOf("%") != -1) {
+					trackname = AmuseUtil.URL2Unicode('GB2312', track);
+					trackurl = tracks[i].split("href=")[1].split('"')[1];
+				} else {
+					
+					AmuseDebugOut(AmuseUtil.toHex(track));
+					trackname = track;//FileIO.toUnicode('GB2312', track);
+					trackurl = tracks[i].split("href=")[1].split('"')[1];
+					
+					//trackurl = AmuseUtil.encodeURIComponent_GB2312(FileIO.fromUnicode('GB2312',trackurl));
+					AmuseDebugOut(AmuseUtil.toHex(trackurl));
+				}
 				
-				var trackurl = tracks[i].split("href=")[1].split('"')[1];
-				//AmuseDebugOut("trackurl:" + trackurl + "\n");
-				//AmuseDebugOut("trackname:" + trackname + "\n");
+				trackurl = trackurl.replace(/&lm=-1/g, "&lm=0");
+				AmuseDebugOut("trackurl:" + trackurl + "\n");
 				data.push([trackname, trackurl]);
 				Idx++;										
 			}
@@ -51,10 +71,7 @@ var AmuseBaidu = {
 			for(var i = 0; i < urls.length && i < limit; i++)
 			{
 				var url = urls[i];
-				var trackname;
-				url = url.replace(/&lm=-1/g, "&lm=0")
-				AmuseDebugOut("[AmuseBaidu.parseTrack] url: " + url);
-				
+				var trackname;				
 				trackname = url.split('=baidumt,')[1];
 				trackname = trackname.split('&word')[0];
 				//AmuseDebugOut("[AmuseBaidu.parseTrack] trackname: " + encodeURIComponent(trackname));			
@@ -67,8 +84,6 @@ var AmuseBaidu = {
 			for(var i = 0; i < urls.length && i < limit; i++)
 			{
 				var url = urls[i];
-				url = url.replace(/&lm=-1/g, "&lm=0")
-				AmuseDebugOut("[AmuseBaidu.parseTrack] url: " + url);
 						
 				var lyricUrl = null;
 				if(Lyrics	&& Lyrics[i]) { 

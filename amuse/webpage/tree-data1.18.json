@@ -6,27 +6,79 @@
   ,{
 	    text:'谷歌 Music',
 	    expanded: true,
-	    children:[{text:'Xuwei',url:'http://www.google.cn/music/search?q=%E9%A3%9E%E9%B8%9F',leaf:true},{
-	        text:'歌曲200强',
-	        url:'http://www.google.cn/music/chartlisting?q=all_songs_cn&cat=song',
+	    children:[
+	    { text:'歌曲排行榜',
+	    	expanded: false,
+	    	children:[
+	    {
+	        text:'华语歌曲200强',
+	        url:'http://www.google.cn/music/chartlisting?q=chinese_songs_cn&cat=song',
 	        leaf:true
 	    },{
-	        text:'新歌100强',
-	        url:'http://www.google.cn/music/chartlisting?q=all_songs_cn&cat=song',
+	        text:'华语新歌100强',
+	        url:'http://www.google.cn/music/chartlisting?q=new_songs_cn&cat=song',
 	        leaf:true
 	    },{
-	        text:'摇滚歌曲',
+	        text:'欧美歌曲200强',
+	        url:'http://www.google.cn/music/chartlisting?q=ea_songs_cn&cat=song',
+	        leaf:true
+	    },{
+	        text:'欧美新歌100强',
+	        url:'http://www.google.cn/music/chartlisting?q=ea_new_songs_cn&cat=song',
+	        leaf:true
+	    },{
+	        text:'最新发行歌曲',
+	        url:'http://www.google.cn/music/chartlisting?q=new-release_songs_cn&cat=song',
+	        leaf:true
+	    },{
+	        text:'彩铃歌曲100强',
+	        url:'http://www.google.cn/music/chartlisting?q=ringtone_cn&cat=song',
+	        leaf:true
+	    },{
+	        text:'摇滚歌曲100强',
 	        url:'http://www.google.cn/music/chartlisting?q=rock_songs_cn&cat=song',
 	        leaf:true
 	    },{
-	        text:'影视歌曲',
+	        text:'影视歌曲100强',
 	        url:'http://www.google.cn/music/chartlisting?q=soundtrack_songs_cn&cat=song',
 	        leaf:true
 	    },{
-	        text:'民族歌曲',
+	        text:'民族歌曲100强',
 	        url:'http://www.google.cn/music/chartlisting?q=ethnic_songs_cn&cat=song',
 	        leaf:true
-	    },{
+	    }
+	    ]}, 
+	    
+	 { text:'音乐专题',
+	    	expanded: false,
+	    	children:[
+					 { text:'New!',
+			    	expanded: false,
+			    	children:[
+							{
+							text:'流浪者思乡恋曲',
+							url:'http://www.google.cn/music/chartlisting?q=top100_chinese_band_songs&cat=song',
+							leaf:true
+							},{
+							text:'影视金曲精粹',
+							url:'http://www.google.cn/music/chartlisting?q=top100_ost_classic_songs&cat=song',
+							leaf:true
+							},{
+							text:'新春旋律祝福你',
+							url:'http://www.google.cn/music/chartlisting?q=top100_spring_festival_theme_2009&cat=song',
+							leaf:true
+							},{
+							text:'新年喜乐厅',
+							url:'http://www.google.cn/music/chartlisting?q=top100_happy_new_year_songs&cat=song',
+							leaf:true
+							},{
+							text:'圣诞祝福歌',
+							url:'http://www.google.cn/music/chartlisting?q=top100_christmas_songs&cat=song',
+							leaf:true
+							}
+						]
+					},
+	    {
 	        text:'美丽主妇家务歌',
 	        url:'http://www.google.cn/music/chartlisting?q=top100_charm_housewives_songs&cat=song',
 	        leaf:true
@@ -142,19 +194,20 @@
 			url:'http://www.google.cn/music/chartlisting?q=top100_midi_festival_songs&cat=song',
 			leaf:true
 			},
-			
 			{
 			text:'华人组合热歌榜',
-			url:'http://www.google.cn/music/chartlisting?q=top100_chinese_band_songs&cat=song',
+			url:'http://www.google.cn/music/chartlisting?q=top100_homesick_songs&cat=song',
 			leaf:true
-			},
-	    ]
+			}
+			]
+		}
+	 ]
 	}	
 	
   ,{
     text:'百度MP3',
-    expanded: true,
-    children:[{text:'XUwei',url:'http://mp3.baidu.com/singerlist/%D0%ED%CE%A1.html',leaf:true},{
+    expanded: false,
+    children:[{
         text:'MP3排行榜',
         url:'http://list.mp3.baidu.com/list/topmp3.html?id=1',
         leaf:true
@@ -245,7 +298,7 @@
     }]
 } ,{
     text:'雅虎 music',
-    expanded: true,
+    expanded: false,
     children:[
 			{
 					text:'新歌Top500',
