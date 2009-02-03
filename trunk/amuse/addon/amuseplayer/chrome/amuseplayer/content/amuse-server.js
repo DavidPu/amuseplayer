@@ -11,7 +11,7 @@ var AmuseServer = {
 		CLIENT_SEARCHTRACK: '4',
 		CLIENT_SEARCHLYRIC: '5',
 		CLIENT_LOADLYRIC: '6',
-		EXTENSION_VERSION:'2.0',
+		EXTENSION_VERSION:'2.2',
 		debugMode:false,
 		logfile:null,
 		
@@ -176,48 +176,6 @@ var AmuseServer = {
 			AmuseUtil.XHRAsync(url, encode, callback, userData);
 			//callback(AmuseUtil.XHRSync(url, encode), userData);
 		},
-		
-//		getData2: function(url, callback, userData, encode) {
-//			var httpRequest = null;
-//			
-//			if(url == null) return;
-//			
-//			function onLoad(evt)
-//			{
-//				var respData = httpRequest.responseText;
-//				if(respData.length)
-//				{
-//					callback(respData, userData);
-//					httpRequest = null;
-//				}
-//			}
-//			try {
-//				httpRequest = new XMLHttpRequest();
-//				
-//				httpRequest.open("GET", url, true);	
-//				httpRequest.onload = onLoad;
-//				if(encode)
-//					httpRequest.overrideMimeType(encode);
-//					
-//				httpRequest.send(null);
-//				
-//				/*
-//				httpRequest = new XMLHttpRequest();
-//				httpRequest.open("GET", url, false);	
-//				if(encode)
-//					httpRequest.overrideMimeType(encode);	
-//				httpRequest.send(null);
-//				if(httpRequest.status == 200) {
-//					callback(httpRequest.responseText, userData);
-//				}
-//				httpRequest = null;
-//				*/
-//			} catch(e){
-//				httpRequest = null;
-//				AmuseDebugOut("[Execption] getData: url:" + url);
-//				}
-//			
-//		},
 			
 		loadListCallback_Baidu: function(resText, userData) {
 				var data = AmuseBaidu.parseTrackList(resText, 0);

@@ -5,7 +5,7 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="{1c25e602-e331-4b39-a8ef-f06fdc52fc61}"
                    em:name="Amuse Player"
-                   em:version="2.0"
+                   em:version="2.2"
                    em:creator="pulq.ustc@gmail.com"
                    em:description="Mp3 player for Baidu.com mp3, Yahoo.com music and google music"
                    em:homepageURL="http://www.amuseplayer.com/"

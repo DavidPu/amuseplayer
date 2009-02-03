@@ -83,6 +83,7 @@ var AmuseLyric = {
 	
 	loadLyric: function(lyric_param) {
 		var lyric = lyric_param;//test_lyric;
+		lyric = lyric.replace(/<\d\d:\d\d.\d\d>/g, "");
 		var regexp = /\[\d\d:\d\d.\d\d\][^\[]*/g;
 		var strings = lyric.match(regexp);
 		

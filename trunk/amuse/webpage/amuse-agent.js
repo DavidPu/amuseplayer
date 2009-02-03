@@ -1,14 +1,16 @@
 function $(el) { return document.getElementById(el);}
 function AmuseDebugOut2(arg){AmuseDebugOut(arg);}
-function AmuseDebugOut(arg){}
-function AmuseDebugOutLyrics(arg)
-{
+function AmuseDebugOutLyrics(arg){AmuseDebugOut(arg);}
+function AmuseDebugOutSaveData(arg){AmuseDebugOut(arg);}
+
+function AmuseDebugOut(arg)
+{/*
 	dump(arg + "\n");
 	
 	if(typeof(console) != 'undefined')
 	{
 		console.log(arg);
-	}
+	}*/
 }
 
 var AmuseAgent = {
@@ -81,6 +83,7 @@ var AmuseAgent = {
 				AmuseAgent.currenttrack = index;
 				
 		 },
+		 
 			
 			onPlay: function(node, evt){
 				var sm = gridPanel.getSelectionModel();
@@ -103,7 +106,6 @@ var AmuseAgent = {
 					AmuseDebugOut("[onPlay]: " + sels[i].get('url'));
 					AmuseDebugOut("[onPlay]: " + sels[i].get('song'));
 					}
-					
 					AmuseSound.reset();
 					AmuseAgent.playNext();
 				}
@@ -325,7 +327,7 @@ var AmuseAgent = {
 		loadMp3: function(index) {
 			AmuseDebugOut("[loadMp3]index: " + index);
 			
-			if(index >= AmuseAgent.tracklist.length -1 ) 
+			if(index > AmuseAgent.tracklist.length -1 ) 
 			{
 				return -1;
 			}
@@ -375,7 +377,7 @@ var AmuseAgent = {
 			AmuseAgent.tracklist[index].tryindex++;
 			//alert("onLoadMp3:" + mp3url);
 			mp3url = mp3url.split('"')[1];
-			if(!mp3url && mp3url.length == 0)
+			if( !mp3url || mp3url.indexOf('http://') != 0 )
 			{
 				AmuseDebugOut("[onLoadMp3] mp3url.length " + mp3url.length);
 				if(AmuseSound.tryUrlCnt < AmuseSound.s_MaxTryCnt) {
@@ -424,7 +426,7 @@ var AmuseAgent = {
 				//FIXME::::
 				if(/google/.test(track.queryurl)) {
 					lyricurl = track.queryurl;
-				} else {
+				} else if(track.crypturls && track.crypturls[track.tryindex]) {
 					lyricurl = track.crypturls[track.tryindex][2];
 				}
 			}			
@@ -501,6 +503,11 @@ var AmuseAgent = {
 			var userdata = node.getAttribute("userdata");
 			if(data == null || data == 'undefined') {
 				//TODO: Error Handler..
+				if(cmd == AmuseAgent.CLIENT_LOADTRACK || 
+						cmd == AmuseAgent.CLIENT_LOADMP3)
+					{
+						AmuseAgent.playNext();
+					}
 				return;
 			}
 			
@@ -553,7 +560,7 @@ function redirect_oldVersion()
 function redirect()
 {
 	AmuseDebugOut("[redirect]" +AmuseAgent.EXTENSION_VERSION);
-	if(AmuseAgent.EXTENSION_VERSION != "\"2.0\"")
+	if(AmuseAgent.EXTENSION_VERSION != "\"2.2\"")
 	{
 		var prompt = document.getElementById("versioncheck");
 		prompt.style.display= "";
@@ -566,6 +573,8 @@ function redirect()
 	}
 }
 
+
+
 window.addEventListener("load", function(e) 
 {
 
@@ -574,8 +583,7 @@ window.addEventListener("load", function(e)
 	if(window.location.pathname.indexOf("/amuseplayer.html") != -1)
 	{
 		AmuseAgent.checkVersion();
-		setTimeout(redirect, 90);
+		setTimeout(redirect, 200);
 	}
-	
 }, false);	
 

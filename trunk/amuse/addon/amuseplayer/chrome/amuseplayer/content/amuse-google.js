@@ -8,8 +8,8 @@ var AmuseGoogle = {
 		if(limit <= 0) limit = 65535;
 		//e.g: http://www.google.cn/music/songstreaming?id=Sb0c7769ef3f34a57&output=xml&sig=b54c8dd70af5b16ff2b8a06a8b45c19f
 		
-		var trackIdReg = /<td class=\"Streaming\"><a[^>]*id%3D[^%]*/g;
-		var trackNameReg = /<td class=\"Title\"><a[^>]*>[^<]*/g;
+		var trackIdReg = /<td class=\"Title BottomBorder\"><a[^>]*id%3D[^%]*/g;
+		var trackNameReg = /<td class=\"Title BottomBorder\"><a[^>]*>[^<]*/g;
 		var GOOGLE_PLAYER_KEY = "eca5badc586962b6521ffa54d9d731b0";
 		var soundId;
 		var soundName;
@@ -27,8 +27,8 @@ var AmuseGoogle = {
 										return String.fromCharCode(e.substring(2, e.length-1));}
 										);
 			hash = hex_md5(GOOGLE_PLAYER_KEY + soundId);
-			//AmuseDebugOut("[loadListCallback_Google] soundName " + soundName);
-			//AmuseDebugOut("[loadListCallback_Google] hash " + hash);
+			AmuseDebugOut("[loadListCallback_Google] soundName " + soundName);
+			AmuseDebugOut("[loadListCallback_Google] hash " + hash);
 			data.push([	soundName,
 									"http://www.google.cn/music/songstreaming?id=" + soundId + "&output=xml&sig=" + hash
 								]);

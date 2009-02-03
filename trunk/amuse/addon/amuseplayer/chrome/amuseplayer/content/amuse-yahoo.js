@@ -8,20 +8,33 @@ var AmuseYahoo = {
 		if(limit <= 0) limit = 65535;
 
 		//http://www.yahoo.cn/s?v=music&p=%E5%8C%97%E4%BA%AC%E6%AC%A2%E8%BF%8E%E4%BD%A0&source=ysmt_laoy_r&pid=bd_mp3
-		var trackReg = /http:\/\/www.yahoo.cn\/s[^\"]+/g;
+		//var trackReg = /http:\/\/www.yahoo.cn\/s[^\"]+/g;
+		var trackReg = /<a href=\"http:\/\/[^\"]+=music&p=[^\"]+\"[^\>]+>/ig;
 		var data = [];
-		var track = null;
-		while( (track = trackReg.exec(resText)) != null)
+		var tracks = null;
+		tracks = resText.match(trackReg);
+		for(var i = 0; i < tracks.length && i < limit; i++)
 		{
+			var track = tracks[i];
 			//AmuseDebugOut("[loadListCallback_Yahoo]trackurl:" + track[0]);
 			//search mp3 type only.
-			var trackname = track[0].match(/&p=[^&]+/g);
-			var trackurl = track[0] += "&x=mp3%3Aalls";
+			var trackname = track.match(/&p=[^&]+/g);
+			//var trackurl = track.split('"')[1];
+			// trackurl += "&x=mp3%3Aalls";
 			
 			trackname = decodeURIComponent(trackname[0].split("=")[1]);
-			//AmuseDebugOut("[loadListCallback_Yahoo]trackname:" + trackname);
-			//AmuseDebugOut("[loadListCallback_Yahoo]trackurl:" + trackurl);
-			data.push([trackname,trackurl]);
+			var trackname_dis = trackname;
+			AmuseDebugOut("==unicode== " + AmuseUtil.toHex(trackname));
+			trackname = FileIO.fromUnicode('GB2312', trackname);
+			
+			AmuseDebugOut("==gb2312== " + AmuseUtil.toHex(trackname));
+			AmuseDebugOut(AmuseUtil.encodeURIComponent_GB2312(trackname));
+			trackname = AmuseUtil.encodeURIComponent_GB2312(trackname);
+			
+			var trackurl = 'http://mp3.baidu.com/m?tn=baidump3&ct=134217728lm=0&word=' + trackname;
+			AmuseDebugOut("[loadListCallback_Yahoo]trackname:" + trackname);
+			AmuseDebugOut("[loadListCallback_Yahoo]trackurl:" + trackurl);
+			data.push([trackname_dis,trackurl]);
 		}
 		return data;
 	},	
