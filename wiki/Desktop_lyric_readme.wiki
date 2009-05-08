@@ -1,0 +1,15 @@
+安装adobe air,amuse player,alltray
+按照amuseplayer的说明amuseplayer作为独立的应用程序使用。
+
+安装：
+进入主文件夹，按ctrl+H显示隐藏文件夹，找到/.mozilla/firefox/43f46gyj.default/extensions /{1c25e602-e331-4b39-a8ef-f06fdc52fc61}/chrome/amuseplayer/content
+将content里的文件替换
+
+运行：
+运行桌面配置好的amuseplayer，运行lyricApp.py
+建议使用alltray将窗口最小化到托盘，呵呵。
+请确保8080端口未被占用
+
+从baidu搜索的lyric歌词质量不高，可以选择从千千静听服务器搜索歌词，方法是：打开amuse-server.js，将158行注释，将159行除去注释。google music的歌词还蛮准，就不用换了。
+
+提示：关于歌曲下载，当amuseplayer作为独立的应用程序使用的时候右击链接地址，无法弹出save link as，解决方法是直接用鼠标将链接拖动到桌面，ubuntu系统会自动下载歌曲文件到桌面上。
