@@ -1,5 +1,5 @@
 #labels Phase-Deploy,Desktop-lyric-readme
-安装adobe air,amuse player,alltray
+安装amuse player,alltray
 按照amuseplayer的说明amuseplayer作为独立的应用程序使用。
 
 安装：
@@ -7,7 +7,7 @@
 将content里的文件替换
 
 运行：
-运行桌面配置好的amuseplayer，运行lyricApp.py
+运行桌面配置好的amuseplayer，运行LyricAppForAmuse.py
 建议使用alltray将窗口最小化到托盘，呵呵。
 请确保8080端口未被占用
 
